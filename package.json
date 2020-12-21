@@ -1,0 +1,24 @@
+{
+  "name": "notepad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bin/html/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "window": {
+    "frame": false,
+    "toolbar": false,
+    "transparent": true,
+    "icon": "bin/assets/png/hehe.png"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nwjs-types": "^1.0.0"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.2"
+  }
+}

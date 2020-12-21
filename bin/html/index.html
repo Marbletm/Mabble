@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+
+    <!--    <script src="../js/menuBar.js"></script>-->
+    <!--    <script src="../js/contextMenu.js"></script>-->
+    <script src="../vendors/alertbundle.js"></script>
+    <script src="../js/windowMenu.js"></script>
+    <script src="../js/processFile.js"></script>
+    <script src="../js/main.js"></script>
+
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/contextButtons.css">
+
+</head>
+<body>
+<div id="body-wrapper">
+    <div class="window-menu">
+        <div id="window-menu" class="window-menu">
+            <div id="draggable-area"></div>
+            <button id="minimize-button" onclick="minimizeWindow()">
+                <span class="window-menu-icons" id="minimize-icon"></span>
+            </button>
+            <button id="maximize-button" onclick="maximizeWindow()">
+                <span class="window-menu-icons" id="maximize-icon"></span>
+            </button>
+            <button id="cross-button" onclick="closeWindow()">
+                <span class="window-menu-icons" id="cross-icon"></span>
+            </button>
+        </div>
+    </div>
+
+    <div id="documents">
+    <div class="document">
+    <div id="context-buttons" class="context-buttons">
+        <div id="load"><span></span><input type="file" accept="text/plain, application/json" id="load-file"></div>
+        <div id="save"><span></span><input type="file" accept=".txt" id="save-file" nwsaveas></div>
+        <div id="delete"><span></span></div>
+    </div>
+    <div class="context-buttons"></div>
+    <div id="text-wrapper">
+        <div id="text" contenteditable="true"></div>
+    </div>
+    </div>
+    </div>
+
+
+</div>
+</body>
+</html>
