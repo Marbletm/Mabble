@@ -3,9 +3,12 @@ class Document {
 
     constructor() {
         this.id = Document.getID();
-        this.element = new HTMLDivElement;
+        this.element = null;
         this.oldText = '';
+        this.textElement = null;
         this.currentFilePath = null;
+
+        this.init();
     }
 
     static getID() {
@@ -17,23 +20,29 @@ class Document {
     init() {
         const fs = nw.require('fs');
         const id = this.id;
-        const txt = fs.readFileSync('../html/document.html', 'utf8');
+        const txt = fs.readFileSync('html/document.html', 'utf8');
 
-        this.element = document.getElementById('documents').insertAdjacentHTML('beforeend' ,txt.replace('{{id}}', id));
+        document.getElementById('documents').insertAdjacentHTML('beforeend' ,txt.replace('{{id}}', id));
+        this.element = document.getElementById(`${id}`);
+        this.textElement = this.element.getElementsByClassName('text').item(0);
 
-        document.getElementById('load').onclick = function () {
-            document.getElementById('load-file').click();
+        const element = this.element;
+        this.element.getElementsByClassName('load').item(0).onclick = function () {
+            element.getElementsByClassName('load-file').item(0).click();
         };
-        document.getElementById('load-file').addEventListener('input', loadFile);
-
-        document.getElementById('save').onclick = saveFile;
-        document.getElementById('delete').onclick = newFile;
+        this.element.getElementsByClassName('load').item(0).getElementsByClassName('load-file').item(0).addEventListener('input', this.load.bind(this));
+        this.element.getElementsByClassName('save').item(0).onclick = this.save.bind(this);
+        this.element.getElementsByClassName('delete').item(0).onclick = this.new.bind(this);
+        this.element.getElementsByClassName('close').item(0).onclick = this.selfDestruct.bind(this);
     }
 
     load() {
-        currentFilePath = this.element.getElementsByClassName('load-file').item(0).value;
+        const contextButtons = this.element.getElementsByClassName('context-buttons').item(0);
+        const load = contextButtons.getElementsByClassName('load').item(0);
+        this.currentFilePath = load.getElementsByClassName('load-file').item(0).value;
+
         const fs = nw.require('fs');
-        let txt = fs.readFileSync(currentFilePath, 'utf8');
+        let txt = fs.readFileSync(this.currentFilePath, 'utf8');
 
         try {
             let obj = JSON.parse(txt);
@@ -46,34 +55,59 @@ class Document {
 
     save() {
         const fs = nw.require('fs');
-        if (currentFilePath !== null) {
-            const content = this.element.getElementsByClassName('text').item(0).innerHTML;
-            fs.writeFileSync(currentFilePath, content);
-            oldText = content;
+        if (this.currentFilePath !== null) {
+            const content = this.textElement.innerHTML;
+            fs.writeFileSync(this.currentFilePath, content);
+            this.oldText = content;
         } else {
-            const save = document.getElementsByClassName('save-file').item(0);
+            const save = this.element.getElementsByClassName('save-file').item(0);
+            const element = this.textElement;
             save.addEventListener('input', function() {
                 const path = save.value;
-                const content = this.element.getElementsByClassName('text').item(0).innerHTML;
+                const content = element.innerHTML;
                 fs.writeFileSync(path, content);
-                oldText = content;
+                this.oldText = content;
             });
             save.click();
         }
     }
 
     async new() {
-        const element = this.element.getElementsByClassName('text').item(0);
-        if(element.innerHTML !== oldText) {
-            if(await aboutToDeleteAlert()) return;
+        const element = this.textElement;
+        if(element.innerHTML !== this.oldText) {
+            if(await Document.aboutToDeleteAlert()) return;
         }
 
-        oldText = '';
-        currentFilePath = null;
+        this.oldText = '';
+        this.currentFilePath = null;
         element.innerHTML = '';
     }
 
-    async aboutToDeleteAlert() {
+    async selfDestruct() {
+        if (this.isChanged()) {
+            if (await Document.aboutToDeleteAlert()) {
+                return;
+            }
+        }
+
+        this.element.remove();
+        for(let i = 0; i < documents.length; i++) {
+            const document = documents[i];
+            if (document === this) {
+                documents.splice(i, 1);
+                break;
+            }
+        }
+
+        if(documents.length === 0) {
+            const fs = nw.require('fs');
+            const txt = fs.readFileSync('html/none.html', 'utf8');
+            document.getElementById('documents').insertAdjacentHTML('beforeend', txt);
+        }
+        updateWidth();
+    }
+
+    static async aboutToDeleteAlert() {
         return !await swal({
             title: "Are you sure?",
             text: "You're about to perform an action that will erase your progress so far. Are you sure that you want to proceed?",
@@ -81,5 +115,9 @@ class Document {
             buttons: true,
             dangerMode: true,
         });
+    }
+
+    isChanged() {
+        return this.oldText !== this.element.getElementsByClassName('text').item(0).innerHTML;
     }
 }

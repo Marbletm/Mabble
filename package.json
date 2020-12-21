@@ -1,24 +1,23 @@
 {
-  "name": "notepad",
+  "name": "notepad-build",
   "version": "1.0.0",
   "description": "",
-  "main": "bin/html/index.html",
+  "main": "build.js",
   "scripts": {
+    "build": "node build.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "window": {
-    "frame": false,
-    "toolbar": false,
-    "transparent": true,
-    "icon": "bin/assets/png/hehe.png"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Marbletm/Mabble.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nwjs-types": "^1.0.0"
+  "bugs": {
+    "url": "https://github.com/Marbletm/Mabble/issues"
   },
-  "dependencies": {
-    "sweetalert": "^2.1.2"
+  "homepage": "https://github.com/Marbletm/Mabble#readme",
+  "devDependencies": {
+    "nw-builder": "^3.5.7"
   }
 }

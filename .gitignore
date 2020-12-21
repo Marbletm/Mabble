@@ -3,6 +3,8 @@
 *.iml
 /.idea/
 **/nw/
+**/cache/
+**/out/
 
 # Logs
 logs

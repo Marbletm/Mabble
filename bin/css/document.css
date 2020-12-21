@@ -1,0 +1,48 @@
+#documents {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    position: fixed;
+
+}
+
+.document {
+    padding-top: 50px;
+}
+
+.text-wrapper {
+    border: solid #1b1b1b 3px;
+
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+
+    background-color: #e1e1e1;
+
+    z-index: 0;
+}
+
+.text {
+    z-index: 0;
+
+    margin-top: 10px;
+
+    border: 0;
+    outline: none;
+
+    /*padding: 10px 10px 0;*/
+
+    width: 98%;
+    resize: none;
+
+    white-space: pre-wrap;
+    caret-color: #b600a7;
+    background-color: #e1e1e1;
+
+    color: #1b1b1b;
+    font-family: Arial, serif;
+    font-size: 30px;
+}

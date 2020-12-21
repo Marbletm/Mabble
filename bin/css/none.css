@@ -1,0 +1,29 @@
+#none-displayed {
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #636363;
+}
+
+#none-displayed > span {
+    background-image: url("../assets/svg/newDocument.svg");
+    background-size: cover;
+
+    width: 200px;
+    height: 200px;
+
+    filter: invert() brightness(20%);
+}
+
+#none-displayed > h1 {
+    font-family: "Calibri Light";
+    width: 60%;
+
+    text-align: center;
+    color: #1b1b1b;
+}

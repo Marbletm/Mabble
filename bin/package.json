@@ -1,0 +1,24 @@
+{
+  "name": "Mabble",
+  "version": "2.0.0",
+  "description": "",
+  "main": "html/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "window": {
+    "frame": false,
+    "toolbar": false,
+    "transparent": true,
+    "icon": "assets/png/notepad.png"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nwjs-types": "^1.0.0"
+  },
+  "dependencies": {
+    "sweetalert": "^2.1.2"
+  }
+}

@@ -1,20 +1,27 @@
-.context-buttons {
-    width: 100vw;
+.context-buttons-separator, .context-buttons {
     height: 50px;
 }
 
-#context-buttons {
+.context-buttons-separator {
+    display: inline-block;
+}
+
+.context-buttons {
     position: fixed;
     top: 20px;
+
+    width: 100%;
 
     display: flex;
     flex-direction: row;
     align-items: center;
 
+    z-index: 1;
+
     background-color: #1b1b1b;
 }
 
-#load, #save, #delete {
+.context-button {
 
     margin-left: 6px;
 
@@ -30,11 +37,11 @@
     background-color: #2b2b2b;
 }
 
-#load > input, #save > input {
+.context-button > input {
     display: none;
 }
 
-#load:hover, #save:hover, #delete:hover {
+.context-button:hover {
     -webkit-box-shadow: inset 2px 3px 3px 0px rgb(38, 38, 38);
     -moz-box-shadow: inset 2px 3px 3px 0px rgb(38, 38, 38);
     box-shadow: inset 2px 3px 3px 0px rgb(38, 38, 38);
@@ -44,26 +51,33 @@
     cursor: pointer;
 }
 
-#load > span, #save > span, #delete > span {
+.context-button-icon {
     background-size: contain;
     display: inline-block;
     filter: invert();
 }
 
-#load > span {
+.load > .context-button-icon {
     width: 25px;
     height: 20px;
     background-image: url("../assets/svg/folder.svg");
 }
 
-#save > span {
+.save > .context-button-icon {
     width: 20px;
     height: 20px;
     background-image: url("../assets/svg/floppy.svg");
 }
 
-#delete > span {
+.delete > .context-button-icon {
     width: 20px;
     height: 25px;
     background-image: url("../assets/svg/delete.svg");
+}
+
+.close > .context-button-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url("../assets/svg/cross.svg");
+    filter: none !important;
 }
